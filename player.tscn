@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://djy2016ltpax8"]
+[gd_scene load_steps=13 format=3 uid="uid://djy2016ltpax8"]
 
 [ext_resource type="Script" uid="uid://df36liqp44nvt" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://cki0c4pcwt8qp" path="res://assets/UPeeOdZa2kDcHPnZb0YaMiPziWWbvRlQ.jpg (1).png" id="2_hqtel"]
 [ext_resource type="Texture2D" uid="uid://d0yghah3plnie" path="res://assets/gun_sprites.png" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://bxxgttfca1v8j" path="res://camera_system.gd" id="2_sweqy"]
 [ext_resource type="AudioStream" uid="uid://br7p0j66p3phx" path="res://assets/revolver_shot1.wav" id="3_i3pqv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
@@ -92,13 +93,13 @@ stretch_shrink = 2
 handle_input_locally = false
 render_target_update_mode = 4
 
-[node name="FPViewportContainer2" type="SubViewportContainer" parent="CanvasLayer"]
+[node name="FPViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(1920, 540)
 offset_right = 1920.0
 offset_bottom = 540.0
 stretch_shrink = 2
 
-[node name="ViewportFP" type="SubViewport" parent="CanvasLayer/FPViewportContainer2"]
+[node name="ViewportFP" type="SubViewport" parent="CanvasLayer/FPViewportContainer"]
 handle_input_locally = false
 render_target_update_mode = 4
 
@@ -152,3 +153,6 @@ color = Color(1, 1, 1, 0.76862746)
 [node name="ShootSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_i3pqv")
 bus = &"Sfx"
+
+[node name="CameraSystem" type="Node" parent="."]
+script = ExtResource("2_sweqy")
