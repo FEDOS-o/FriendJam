@@ -7,14 +7,15 @@ extends CharacterBody3D
 @onready var cross_hair: ColorRect = $CanvasLayer/CrossHair
 @onready var fp_camera: Camera3D = $FPCamera
 @onready var td_camera: Camera3D = $TDCamera
-@onready var viewport_container: SubViewportContainer = $CanvasLayer/ViewportContainer
-@onready var viewport_fp: SubViewport = $CanvasLayer/ViewportContainer/ViewportFP
-@onready var viewport_td: SubViewport = $CanvasLayer/ViewportContainer/ViewportTD
+@onready var td_viewport_container: SubViewportContainer = $CanvasLayer/TDViewportContainer
+@onready var viewport_td: SubViewport = $CanvasLayer/TDViewportContainer/ViewportTD
+@onready var fp_viewport_container: SubViewportContainer = $CanvasLayer/FPViewportContainer2
+@onready var viewport_fp: SubViewport = $CanvasLayer/FPViewportContainer2/ViewportFP
 
 
 
 const SPEED = 5.0
-const MOUSE_SENS = 0.5
+const MOUSE_SENS = 1
 const CAMERA_SENS = 0.5
 
 var shadow_fp: Camera3D
@@ -30,13 +31,23 @@ func _ready():
 	_setup_split_screen()
 	
 func _setup_split_screen():
-	viewport_container.anchors_preset = Control.PRESET_FULL_RECT
-	viewport_container.size = get_viewport().get_visible_rect().size
-
-	screen_size = viewport_container.size
+	# Получаем размер экрана
+	screen_size = get_viewport().get_visible_rect().size
+	
+	# Настраиваем контейнеры для вертикального разделения
+	fp_viewport_container.anchors_preset = Control.PRESET_TOP_WIDE
+	fp_viewport_container.size = Vector2(screen_size.x, screen_size.y / 2)
+	fp_viewport_container.position = Vector2(0, 0)
+	
+	td_viewport_container.anchors_preset = Control.PRESET_BOTTOM_WIDE
+	td_viewport_container.size = Vector2(screen_size.x, screen_size.y / 2)
+	td_viewport_container.position = Vector2(0, screen_size.y / 2)
+	
+	# Настраиваем размеры Viewport'ов
 	viewport_fp.size = Vector2(screen_size.x, screen_size.y / 2)
 	viewport_td.size = Vector2(screen_size.x, screen_size.y / 2)
-
+	
+	# Устанавливаем мировое пространство
 	viewport_fp.world_3d = get_world_3d()
 	viewport_td.world_3d = get_world_3d()
 
@@ -66,26 +77,25 @@ func _copy_camera_properties(source: Camera3D, target: Camera3D):
 	target.near = source.near
 	target.far = source.far
 	target.cull_mask = source.cull_mask
+	target.global_transform = source.global_transform
 
 func _update_cameras():
-	_update_camera_shadow(shadow_fp, fp_camera)
-	_update_camera_shadow(shadow_td, td_camera)
+	_update_camera_shadow_fp(shadow_fp, fp_camera)
+	_update_camera_shadow_td(shadow_td, td_camera)
 
-	td_camera.global_position = Vector3(
-		global_position.x, 
-		global_position.y + 8, 
-		global_position.z
-	)
-
-func _update_camera_shadow(shadow: Camera3D, source_camera: Camera3D):
+func _update_camera_shadow_fp(shadow: Camera3D, source_camera: Camera3D):
 	if shadow and source_camera:
 		shadow.global_transform = source_camera.global_transform
+		
+func _update_camera_shadow_td(shadow: Camera3D, source_camera: Camera3D):
+	if shadow and source_camera:
+		shadow.global_position = source_camera.global_position
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		var new_position = cross_hair.global_position + event.relative * MOUSE_SENS
-		new_position.x = clamp(new_position.x, 0, screen_size.x)
-		new_position.y = clamp(new_position.y, 0, viewport_fp.size.y)
+		new_position.x = clamp(new_position.x, 0, fp_viewport_container.size.x)
+		new_position.y = clamp(new_position.y, 0, fp_viewport_container.size.y)
 		cross_hair.global_position = new_position 
 		
 	if event.is_action_pressed("rotate_left"):  # Клавиша Q
