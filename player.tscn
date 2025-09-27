@@ -61,6 +61,9 @@ collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_4flbx")
 
+[node name="CameraSystem" type="Node" parent="."]
+script = ExtResource("2_sweqy")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_onrkg")
@@ -68,13 +71,16 @@ shape = SubResource("CapsuleShape3D_onrkg")
 [node name="FPCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
+[node name="RayCast3D" type="RayCast3D" parent="FPCamera"]
+top_level = true
+target_position = Vector3(0, -10000, 0)
+collision_mask = 3
+debug_shape_custom_color = Color(0.20965287, 0.4785878, 0.87546223, 1)
+debug_shape_thickness = 5
+
 [node name="TDCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)
-
-[node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-target_position = Vector3(0, 0, -10000)
-collision_mask = 3
+keep_aspect = 0
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.255, 0, 0, 0, -1.1146404e-08, -0.255, 0, 0.255, -1.1146404e-08, 0, 2, 0)
@@ -124,7 +130,7 @@ offset_bottom = -10.001343
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/VSplitContainer/FP/GunBase"]
+[node name="GunSprite" type="AnimatedSprite2D" parent="CanvasLayer/VSplitContainer/FP/GunBase"]
 position = Vector2(-89, -205)
 sprite_frames = SubResource("SpriteFrames_1jxqw")
 animation = &"Shoot"
@@ -135,17 +141,8 @@ custom_minimum_size = Vector2(0, 540)
 layout_mode = 2
 
 [node name="CrossHair" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -960.0
-offset_top = -540.0
-offset_right = -920.0
-offset_bottom = -500.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 40.0
+offset_bottom = 40.0
 scale = Vector2(0.32, 0.32)
 pivot_offset = Vector2(20, 20)
 color = Color(1, 1, 1, 0.76862746)
@@ -153,6 +150,3 @@ color = Color(1, 1, 1, 0.76862746)
 [node name="ShootSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_i3pqv")
 bus = &"Sfx"
-
-[node name="CameraSystem" type="Node" parent="."]
-script = ExtResource("2_sweqy")

@@ -1,14 +1,33 @@
 extends CharacterBody3D
 
-const SPEED = 5.0
+@onready var gun_sprite: AnimatedSprite2D = $CanvasLayer/VSplitContainer/FP/GunBase/GunSprite
+@onready var shoot_sound: AudioStreamPlayer = $ShootSound
+@onready var cross_hair: ColorRect = $CanvasLayer/CrossHair
+@onready var fp_viewport_container: SubViewportContainer = $CanvasLayer/FPViewportContainer
+@onready var fp_camera: Camera3D = $FPCamera
+@onready var ray_cast_3d: RayCast3D = $FPCamera/RayCast3D
+
+
+const MOUSE_SENS = 1
+const SPEED = 500.0
 const CAMERA_SENS = 0.5
 
 var rotate_left = false
 var rotate_right = false
 
+var can_shoot = true
+
 func _ready():
-	# Инициализация игрока
-	pass
+	gun_sprite.animation_finished.connect(_on_gun_shoot_finished)
+	_setup_raycast()
+
+func _setup_raycast():
+	ray_cast_3d.debug_shape_thickness = 2
+	ray_cast_3d.debug_shape_custom_color = Color(1, 0, 0, 0.8)
+	ray_cast_3d.enabled = true
+	
+	# Устанавливаем начальную позицию RayCast (например, на оружии или камере)
+	ray_cast_3d.global_position = fp_camera.global_position
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("rotate_left"):  # Клавиша Q
@@ -20,16 +39,27 @@ func _input(event: InputEvent) -> void:
 		rotate_right = true
 	elif event.is_action_released("rotate_right"):
 		rotate_right = false
+		
+	if event is InputEventMouseMotion:
+		var new_position = cross_hair.global_position + event.relative * MOUSE_SENS
+		new_position.x = clamp(new_position.x, 0, fp_viewport_container.size.x)
+		new_position.y = clamp(new_position.y, 0, fp_viewport_container.size.y)
+		cross_hair.global_position = new_position
+		_update_raycast_target()
 
 func _process(delta: float) -> void:
-	# Обработка вращения
 	if rotate_left and !rotate_right:
 		rotation.y += CAMERA_SENS * delta
 	elif rotate_right and !rotate_left:
 		rotation.y -= CAMERA_SENS * delta
+		
+	if Input.is_action_just_pressed("shoot"):
+		shoot()
+		
+	_update_raycast_target()
+	
 
 func _physics_process(delta: float) -> void:
-	# Обработка движения
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forwards", "move_backwards")
 	var direction = Vector3.ZERO
 	direction.x = input_dir.x 
@@ -37,14 +67,56 @@ func _physics_process(delta: float) -> void:
 	direction = direction.normalized()
 	
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * SPEED * delta
+		velocity.z = direction.z * SPEED * delta
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, SPEED * delta)
+		velocity.z = move_toward(velocity.z, 0, SPEED * delta)
 	
 	move_and_slide()
 
-# Метод для получения позиции игрока (может понадобиться камере)
 func get_player_position() -> Vector3:
 	return global_position
+
+func _on_gun_shoot_finished() -> void:
+	can_shoot = true
+
+func shoot() -> void:
+	if !can_shoot:
+		return
+	can_shoot = false
+	gun_sprite.play("Shoot")
+	shoot_sound.play()
+	
+func _update_raycast_target():
+	var mouse_pos = cross_hair.global_position
+	var viewport_container_size = fp_viewport_container.size
+	
+	var normalized_pos = mouse_pos / viewport_container_size
+	
+	var ray_origin = fp_camera.global_position
+	var ray_direction = calculate_ray_direction(normalized_pos)
+	
+	ray_cast_3d.global_position = ray_origin
+	ray_cast_3d.target_position = ray_direction * 1000
+	ray_cast_3d.force_raycast_update()
+
+func calculate_ray_direction(normalized_pos: Vector2) -> Vector3:
+	var ndc = Vector2(
+		normalized_pos.x * 2.0 - 1.0,
+		(1.0 - normalized_pos.y) * 2.0 - 1.0 
+	)
+	
+	var camera_transform = fp_camera.global_transform
+	var camera_basis = camera_transform.basis
+	
+	var fov_rad = deg_to_rad(fp_camera.fov)
+	var aspect = fp_viewport_container.size.aspect()
+	
+	var ray_dir_camera = Vector3(
+		ndc.x * aspect * tan(fov_rad * 0.5),
+		ndc.y * tan(fov_rad * 0.5),
+		-1.0
+	).normalized()
+	
+	return camera_basis * ray_dir_camera
