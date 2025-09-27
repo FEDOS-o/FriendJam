@@ -1,0 +1,145 @@
+[gd_scene load_steps=12 format=3 uid="uid://djy2016ltpax8"]
+
+[ext_resource type="Script" uid="uid://df36liqp44nvt" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://cki0c4pcwt8qp" path="res://assets/UPeeOdZa2kDcHPnZb0YaMiPziWWbvRlQ.jpg (1).png" id="2_hqtel"]
+[ext_resource type="Texture2D" uid="uid://d0yghah3plnie" path="res://assets/gun_sprites.png" id="2_onrkg"]
+[ext_resource type="AudioStream" uid="uid://br7p0j66p3phx" path="res://assets/revolver_shot1.wav" id="3_i3pqv"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqtel"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(1536, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1jxqw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onrkg")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3pqv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqtel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sweqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hs0m")
+}],
+"loop": false,
+"name": &"Shoot",
+"speed": 10.0
+}]
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_4flbx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_onrkg")
+
+[node name="FPCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="TDCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+target_position = Vector3(0, 0, -10000)
+collision_mask = 3
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.255, 0, 0, 0, -1.1146404e-08, -0.255, 0, 0.255, -1.1146404e-08, 0, 2, 0)
+texture = ExtResource("2_hqtel")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ViewportTD" type="SubViewport" parent="CanvasLayer/ViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="ViewportFP" type="SubViewport" parent="CanvasLayer/ViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="VSplitContainer" type="VSplitContainer" parent="CanvasLayer"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="FP" type="Control" parent="CanvasLayer/VSplitContainer"]
+custom_minimum_size = Vector2(0, 540)
+layout_mode = 2
+
+[node name="GunBase" type="Control" parent="CanvasLayer/VSplitContainer/FP"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -50.0
+offset_bottom = -10.001343
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/VSplitContainer/FP/GunBase"]
+position = Vector2(-89, -205)
+sprite_frames = SubResource("SpriteFrames_1jxqw")
+animation = &"Shoot"
+autoplay = "Idle"
+
+[node name="TD" type="Control" parent="CanvasLayer/VSplitContainer"]
+custom_minimum_size = Vector2(0, 540)
+layout_mode = 2
+
+[node name="CrossHair" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.32, 0.32)
+pivot_offset = Vector2(20, 20)
+color = Color(1, 1, 1, 0.76862746)
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_i3pqv")
+bus = &"Sfx"

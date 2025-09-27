@@ -1,0 +1,48 @@
+# Godot-specific ignores
+.import/
+export.cfg
+export_presets.cfg
+*.import
+
+# Godot 4+ ignores
+.godot/
+godot-headers/
+
+# User-specific files
+*.gdignore
+*.gditignore
+
+# System-specific files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Build artifacts
+bin/
+build/
+
+# IDE-specific files (VSCode, JetBrains, etc.)
+.vscode/
+.idea/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*~
+
+# Backup files
+*.bak
+*.backup
+
+# OS generated files
+ehthumbs.db
+[Tt]humbs.db
+
+addons/*          # Игнорировать ВСЁ в папке addons...
+!addons/README.md # ...кроме README
+
+
+# Testing ignores
+test/
+tests/
