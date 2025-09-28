@@ -6,6 +6,7 @@ extends CharacterBody3D
 @onready var fp_viewport_container: SubViewportContainer = $CanvasLayer/FPViewportContainer
 @onready var fp_camera: Camera3D = $FPCamera
 @onready var ray_cast_3d: RayCast3D = $FPCamera/RayCast3D
+@onready var ammo: Label = $CanvasLayer/VSplitContainer/FP/Ammo
 
 
 const MOUSE_SENS = 1
@@ -17,9 +18,16 @@ var rotate_right = false
 
 var can_shoot = true
 
+var current_ammo = 7
+var max_ammo = 7
+var reserve_ammo = 35
+var max_reserve_ammo = 35
+
+
 func _ready():
 	gun_sprite.animation_finished.connect(_on_gun_shoot_finished)
 	_setup_raycast()
+	_update_ammo_display()
 
 func _setup_raycast():
 	ray_cast_3d.debug_shape_thickness = 2
@@ -54,7 +62,10 @@ func _process(delta: float) -> void:
 		rotation.y -= CAMERA_SENS * delta
 		
 	if Input.is_action_just_pressed("shoot"):
-		shoot()
+		_shoot()
+		
+	if Input.is_action_pressed("reload"):
+		_reload()
 		
 	_update_raycast_target()
 	
@@ -81,12 +92,41 @@ func get_player_position() -> Vector3:
 func _on_gun_shoot_finished() -> void:
 	can_shoot = true
 
-func shoot() -> void:
+func _shoot() -> void:
 	if !can_shoot:
 		return
+		
+	if current_ammo <= 0:
+		return	
+		
+	current_ammo -= 1
+	_update_ammo_display()
 	can_shoot = false
 	gun_sprite.play("Shoot")
 	shoot_sound.play()
+	
+	
+func _reload() -> void:
+	if current_ammo >= max_ammo or reserve_ammo <= 0:
+		return  # Уже полный магазин или нет патронов для перезарядки
+	
+	var ammo_needed = max_ammo - current_ammo
+	var ammo_to_reload = min(ammo_needed, reserve_ammo)
+	
+	current_ammo += ammo_to_reload
+	reserve_ammo -= ammo_to_reload
+	
+	_update_ammo_display()
+
+func add_ammo(amount: int) -> bool:
+	if reserve_ammo == max_reserve_ammo:
+		return false
+	reserve_ammo = min(reserve_ammo + amount, max_reserve_ammo)
+	_update_ammo_display()
+	return true
+	
+func _update_ammo_display() -> void:
+	ammo.text = "%d / %d" % [current_ammo, reserve_ammo]
 	
 func _update_raycast_target():
 	var mouse_pos = cross_hair.global_position

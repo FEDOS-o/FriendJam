@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://dpv3juwlxulvv"]
+[gd_scene load_steps=12 format=3 uid="uid://dpv3juwlxulvv"]
 
+[ext_resource type="PackedScene" uid="uid://cvnar8urd1kyl" path="res://ammo_box.tscn" id="1_2dftf"]
 [ext_resource type="PackedScene" uid="uid://djy2016ltpax8" path="res://player.tscn" id="1_c6gwx"]
 
 [sub_resource type="GDScript" id="GDScript_4xowi"]
@@ -88,5 +89,17 @@ mesh = SubResource("BoxMesh_cmany")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/MeshInstance3D4/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_c6gwx")
 
+[node name="AmmoBox" parent="Environment" instance=ExtResource("1_2dftf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5491016, 5.7320805)
+
+[node name="AmmoBox2" parent="Environment" instance=ExtResource("1_2dftf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6080265, 0.5491016, 2.218133)
+
+[node name="AmmoBox3" parent="Environment" instance=ExtResource("1_2dftf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6063027, 0.5491016, 1.8219442)
+
+[node name="AmmoBox4" parent="Environment" instance=ExtResource("1_2dftf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5491016, 8.3466835)
+
 [node name="Player" parent="." instance=ExtResource("1_c6gwx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9724288, 11.399361)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15089524, 11.399361)
