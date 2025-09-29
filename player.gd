@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+class_name Player
+
 @onready var gun_sprite: AnimatedSprite2D = $CanvasLayer/VSplitContainer/FP/GunBase/GunSprite
 @onready var shoot_sound: AudioStreamPlayer = $ShootSound
 @onready var cross_hair: ColorRect = $CanvasLayer/CrossHair
@@ -100,6 +102,14 @@ func _physics_process(delta: float) -> void:
 
 func get_player_position() -> Vector3:
 	return global_position
+	
+func freeze() -> void:
+	can_move = false
+	can_shoot = false
+	
+func unfreeze() -> void:
+	can_move = true
+	can_shoot = true
 
 func _on_gun_shoot_finished() -> void:
 	can_shoot = true

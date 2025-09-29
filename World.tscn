@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dpv3juwlxulvv"]
+[gd_scene load_steps=13 format=3 uid="uid://dpv3juwlxulvv"]
 
 [ext_resource type="PackedScene" uid="uid://cvnar8urd1kyl" path="res://ammo_box.tscn" id="1_2dftf"]
 [ext_resource type="PackedScene" uid="uid://djy2016ltpax8" path="res://player.tscn" id="1_c6gwx"]
+[ext_resource type="PackedScene" uid="uid://c6ai5074kvaet" path="res://paper_note.tscn" id="2_bcbcq"]
 
 [sub_resource type="GDScript" id="GDScript_4xowi"]
 
@@ -100,6 +101,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6063027, 0.5491016, 1.8219
 
 [node name="AmmoBox4" parent="Environment" instance=ExtResource("1_2dftf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5491016, 8.3466835)
+
+[node name="PaperNote" parent="Environment" instance=ExtResource("2_bcbcq")]
+transform = Transform3D(0.58257705, 0, -0.8127755, 0, 1, 0, 0.8127755, 0, 0.58257705, 5.0721245, 0, 8.581491)
+
+[node name="PaperNote2" parent="Environment" instance=ExtResource("2_bcbcq")]
+transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, 5.0721245, 0, 11.639094)
 
 [node name="Player" parent="." instance=ExtResource("1_c6gwx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15089524, 11.399361)
