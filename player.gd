@@ -15,7 +15,7 @@ const CAMERA_SENS = 0.5
 
 var rotate_left = false
 var rotate_right = false
-
+var can_move = true 
 var can_shoot = true
 
 var current_ammo = 7
@@ -25,6 +25,7 @@ var max_reserve_ammo = 35
 
 
 func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	gun_sprite.animation_finished.connect(_on_gun_shoot_finished)
 	_setup_raycast()
 	_update_ammo_display()
@@ -56,6 +57,11 @@ func _input(event: InputEvent) -> void:
 		_update_raycast_target()
 
 func _process(delta: float) -> void:
+	if !can_move: 
+		return
+	
+	
+	
 	if rotate_left and !rotate_right:
 		rotation.y += CAMERA_SENS * delta
 	elif rotate_right and !rotate_left:
@@ -71,6 +77,12 @@ func _process(delta: float) -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	
+	if !can_move:  # Блокируем движение во время перезарядки
+		velocity = Vector3.ZERO
+		move_and_slide()
+		return
+	
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forwards", "move_backwards")
 	var direction = Vector3.ZERO
 	direction.x = input_dir.x 
@@ -107,8 +119,13 @@ func _shoot() -> void:
 	
 	
 func _reload() -> void:
-	if current_ammo >= max_ammo or reserve_ammo <= 0:
-		return  # Уже полный магазин или нет патронов для перезарядки
+	if current_ammo >= max_ammo or reserve_ammo <= 0 or !can_move:
+		return  
+	
+	can_move = false
+	can_shoot = false
+	
+	await get_tree().create_timer(2.0).timeout
 	
 	var ammo_needed = max_ammo - current_ammo
 	var ammo_to_reload = min(ammo_needed, reserve_ammo)
@@ -116,7 +133,12 @@ func _reload() -> void:
 	current_ammo += ammo_to_reload
 	reserve_ammo -= ammo_to_reload
 	
+	
+	
 	_update_ammo_display()
+	
+	can_move = true  # Разблокируем движение
+	can_shoot = true
 
 func add_ammo(amount: int) -> bool:
 	if reserve_ammo == max_reserve_ammo:
