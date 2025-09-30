@@ -70,7 +70,7 @@ mesh = SubResource("BoxMesh_cmany")
 shape = SubResource("ConcavePolygonShape3D_bcbcq")
 
 [node name="MeshInstance3D12" type="MeshInstance3D" parent="Environment"]
-transform = Transform3D(91.85565, 0, 0, 0, 6.679917, 0, 0, 0, 1.2746332, 108.906685, -1.1605263, 5.3932915)
+transform = Transform3D(91.85565, 0, 0, 0, 6.679917, 0, 0, 0, 1.2746332, 108.906685, -1.1605263, 8.622872)
 mesh = SubResource("BoxMesh_cmany")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Environment/MeshInstance3D12"]
@@ -184,10 +184,19 @@ shape = SubResource("ConcavePolygonShape3D_c6gwx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.491055, 0.9513521, -10.26927)
 
 [node name="PaperNote" parent="Environment" instance=ExtResource("2_bcbcq")]
-transform = Transform3D(0.58257705, 0, -0.8127755, 0, 1, 0, 0.8127755, 0, 0.58257705, 5.0721245, 0, 8.581491)
+transform = Transform3D(0.58257705, 0, -0.8127755, 0, 1, 0, 0.8127755, 0, 0.58257705, -10.306638, 0, 11.340731)
 
 [node name="PaperNote2" parent="Environment" instance=ExtResource("2_bcbcq")]
-transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, 5.0721245, 0, 11.639094)
+transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, -23.35412, 0.005344391, 2.237463)
+
+[node name="PaperNote3" parent="Environment" instance=ExtResource("2_bcbcq")]
+transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, 42.64795, 0.005344391, 2.237463)
+
+[node name="PaperNote4" parent="Environment" instance=ExtResource("2_bcbcq")]
+transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, 59.724842, 0.005344391, 26.319422)
+
+[node name="PaperNote5" parent="Environment" instance=ExtResource("2_bcbcq")]
+transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, 162.27692, 0.005344391, 4.393509)
 
 [node name="Player" parent="." instance=ExtResource("1_c6gwx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.736038, 0.15728295, 27.69996)
