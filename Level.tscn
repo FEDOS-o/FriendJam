@@ -1,8 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://dpv3juwlxulvv"]
+[gd_scene load_steps=15 format=3 uid="uid://dcfhcadyrng40"]
 
-[ext_resource type="PackedScene" uid="uid://cvnar8urd1kyl" path="res://ammo_box.tscn" id="1_2dftf"]
-[ext_resource type="PackedScene" uid="uid://djy2016ltpax8" path="res://player.tscn" id="1_c6gwx"]
-[ext_resource type="PackedScene" uid="uid://c6ai5074kvaet" path="res://paper_note.tscn" id="2_bcbcq"]
+[ext_resource type="PackedScene" uid="uid://cvnar8urd1kyl" path="res://ammo_box.tscn" id="1_2nifc"]
+[ext_resource type="PackedScene" uid="uid://c6ai5074kvaet" path="res://paper_note.tscn" id="2_wkftn"]
+[ext_resource type="PackedScene" uid="uid://djy2016ltpax8" path="res://player.tscn" id="3_q4iis"]
 
 [sub_resource type="GDScript" id="GDScript_4xowi"]
 
@@ -180,14 +180,14 @@ mesh = SubResource("BoxMesh_cmany")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/MeshInstance3D7/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_c6gwx")
 
-[node name="AmmoBox" parent="Environment" instance=ExtResource("1_2dftf")]
+[node name="AmmoBox" parent="Environment" instance=ExtResource("1_2nifc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.491055, 0.9513521, -10.26927)
 
-[node name="PaperNote" parent="Environment" instance=ExtResource("2_bcbcq")]
+[node name="PaperNote" parent="Environment" instance=ExtResource("2_wkftn")]
 transform = Transform3D(0.58257705, 0, -0.8127755, 0, 1, 0, 0.8127755, 0, 0.58257705, 5.0721245, 0, 8.581491)
 
-[node name="PaperNote2" parent="Environment" instance=ExtResource("2_bcbcq")]
+[node name="PaperNote2" parent="Environment" instance=ExtResource("2_wkftn")]
 transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, 5.0721245, 0, 11.639094)
 
-[node name="Player" parent="." instance=ExtResource("1_c6gwx")]
+[node name="Player" parent="." instance=ExtResource("3_q4iis")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.736038, 0.15728295, 27.69996)

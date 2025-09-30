@@ -33,7 +33,7 @@ func _ready():
 	_update_ammo_display()
 
 func _setup_raycast():
-	ray_cast_3d.debug_shape_thickness = 2
+	ray_cast_3d.debug_shape_thickness = 1
 	ray_cast_3d.debug_shape_custom_color = Color(1, 0, 0, 0.8)
 	ray_cast_3d.enabled = true
 	
