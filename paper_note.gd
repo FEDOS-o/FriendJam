@@ -1,5 +1,7 @@
 extends Area3D
 
+class_name PaperNote
+
 @export var paper_note_ui_path : String = "res://paper_note_ui.tscn"
 var ui_scene : PackedScene
 

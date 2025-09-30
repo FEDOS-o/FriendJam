@@ -127,6 +127,25 @@ func _shoot() -> void:
 	gun_sprite.play("Shoot")
 	shoot_sound.play()
 	
+	_handle_hit()
+	
+func _handle_hit():
+	if ray_cast_3d.is_colliding():
+		var collider = ray_cast_3d.get_collider()
+		var collision_point = ray_cast_3d.get_collision_point()
+		var collision_normal = ray_cast_3d.get_collision_normal()
+		
+		print("Попадание в: ", collider.name)
+		print("Точка попадания: ", collision_point)
+		print("Нормаль: ", collision_normal)
+		
+		# Проверяем, является ли цель врагом (пример)
+		if collider.has_method("die"):
+			collider.die()
+		
+	else:
+		print("Промах!")
+	
 	
 func _reload() -> void:
 	if current_ammo >= max_ammo or reserve_ammo <= 0 or !can_move:

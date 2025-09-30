@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bt3sjjgr7f7rp"]
+
+[ext_resource type="Texture2D" uid="uid://blpg0jtepx5mq" path="res://assets/rusty_metal_grid_4k.blend/textures/rusty_metal_grid_diff_4k.jpg" id="1_quuep"]
+
+[resource]
+resource_name = "rusty_metal_grid"
+cull_mode = 2
+albedo_texture = ExtResource("1_quuep")
+metallic_texture_channel = 2
+roughness_texture_channel = 1
+normal_enabled = true
+uv1_scale = Vector3(0.29, 0.29, 0.29)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 7.2100058

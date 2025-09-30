@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="FriendJam"
-run/main_scene="uid://dpv3juwlxulvv"
+run/main_scene="uid://dcfhcadyrng40"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -24,6 +24,7 @@ window/size/mode=3
 [global_group]
 
 player=""
+enemies=""
 
 [input]
 
