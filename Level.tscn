@@ -1,10 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://dcfhcadyrng40"]
+[gd_scene load_steps=18 format=3 uid="uid://dcfhcadyrng40"]
 
 [ext_resource type="Script" uid="uid://c7fetub7buikx" path="res://navigation_region_3d.gd" id="1_m3clv"]
 [ext_resource type="Material" uid="uid://bwrxprr56ucyw" path="res://assets/rusty_metal_05_4k.blend/rusty_metal_05_4k.tres" id="1_q4iis"]
 [ext_resource type="Material" uid="uid://bt3sjjgr7f7rp" path="res://assets/rusty_metal_grid_4k.blend/rusty_metal_grid_4k.tres" id="2_m3clv"]
 [ext_resource type="PackedScene" uid="uid://c6ai5074kvaet" path="res://paper_note.tscn" id="2_wkftn"]
 [ext_resource type="PackedScene" uid="uid://djy2016ltpax8" path="res://player.tscn" id="3_q4iis"]
+[ext_resource type="Texture2D" uid="uid://p54e0s3pmuyw" path="res://assets/розовый фон.png" id="4_mxnmf"]
+[ext_resource type="Material" uid="uid://dm1ksg74mbpna" path="res://assets/pie.tres" id="5_4eo0i"]
+[ext_resource type="Material" uid="uid://beiouajhia5qu" path="res://assets/pie_top.tres" id="6_86ljf"]
 [ext_resource type="PackedScene" uid="uid://difbls1p6tm1" path="res://enemy.tscn" id="6_m3clv"]
 
 [sub_resource type="GDScript" id="GDScript_4xowi"]
@@ -31,11 +34,23 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Arr
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_c6gwx"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4eo0i"]
+albedo_texture = ExtResource("4_mxnmf")
+uv1_scale = Vector3(-0.1, -0.1, -0.1)
+uv1_triplanar = true
+
 [node name="World" type="Node3D"]
 script = SubResource("GDScript_4xowi")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3DPony" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+layers = 2
+shadow_enabled = true
+
+[node name="DirectionalLight3DRusty" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_color = Color(0.32172796, 0.32172796, 0.32172793, 1)
+light_energy = 0.67
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -137,7 +152,7 @@ use_collision = true
 [node name="CSGBox3D" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D"]
 transform = Transform3D(757.8049, 0, 0, 0, 1, 0, 0, 0, 172.88408, 57.68778, -0.5033281, 0)
 layers = 2
-material = ExtResource("1_q4iis")
+material = SubResource("StandardMaterial3D_4eo0i")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Environment/PonyWorld/CSGCombiner3D"]
 layers = 2
@@ -145,62 +160,122 @@ layers = 2
 [node name="CSGBox3D2" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D"]
 transform = Transform3D(214.42235, 0, 0, 0, 4, 0, 0, 0, 2, 75.27, 1.987, 31.547)
 size = Vector3(1.0004883, 1, 1)
-material = ExtResource("2_m3clv")
+material = ExtResource("5_4eo0i")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 0.21, 0, 0, 0, 1.045, 0, 0.4, 0)
+size = Vector3(1.0004883, 1, 1)
+material = ExtResource("6_86ljf")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D"]
-transform = Transform3D(214.42235, 0, 0, 0, 4, 0, 0, 0, 2, 75.27, 1.987, -3.3917542)
+transform = Transform3D(215.167, 0, 0, 0, 4, 0, 0, 0, 2, 75.27, 1.987, -3.3917542)
 size = Vector3(1.0004883, 1, 1)
-material = ExtResource("2_m3clv")
+material = ExtResource("5_4eo0i")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D/CSGBox3D4"]
+transform = Transform3D(1, 0, 0, 0, 0.21, 0, 0, 0, 1.105, 0, 0.4, 0)
+size = Vector3(1.0004883, 1, 1)
+material = ExtResource("6_86ljf")
 
 [node name="CSGBox3D9" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D"]
 transform = Transform3D(91.57143, 0, 0, 0, 4, 0, 0, 0, 2, 109.382744, 1.987, 5.531376)
 size = Vector3(1.0004883, 1, 1)
-material = ExtResource("2_m3clv")
+material = ExtResource("5_4eo0i")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D/CSGBox3D9"]
+transform = Transform3D(1.005, 0, 0, 0, 0.21, 0, 0, 0, 1.105, 0, 0.4, 0)
+size = Vector3(1.0004883, 1, 1)
+material = ExtResource("6_86ljf")
 
 [node name="CSGBox3D10" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D"]
 transform = Transform3D(55.63868, 0, 0, 0, 4, 0, 0, 0, 2, 77.83956, 1.987, 19.53027)
 size = Vector3(1.0004883, 1, 1)
-material = ExtResource("2_m3clv")
+material = ExtResource("5_4eo0i")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D/CSGBox3D10"]
+transform = Transform3D(1.005, 0, 0, 0, 0.21, 0, 0, 0, 1.105, 0, 0.4, 0)
+size = Vector3(1.0004883, 1, 1)
+material = ExtResource("6_86ljf")
 
 [node name="CSGBox3D11" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D"]
 transform = Transform3D(28.814316, 0, 0, 0, 4, 0, 0, 0, 2, 0.574481, 1.987, 17.859188)
 size = Vector3(1.0004883, 1, 1)
-material = ExtResource("2_m3clv")
+material = ExtResource("5_4eo0i")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D/CSGBox3D11"]
+transform = Transform3D(1.01, 0, 0, 0, 0.21, 0, 0, 0, 1.105, 0, 0.4, 0)
+size = Vector3(1.0004883, 1, 1)
+material = ExtResource("6_86ljf")
 
 [node name="CSGBox3D13" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D"]
 transform = Transform3D(8.299, 0, 0, 0, 4, 0, 0, 0, 7.915, -14.459562, 1.987, 20.400965)
 size = Vector3(1.0004883, 1, 1)
-material = ExtResource("2_m3clv")
+material = ExtResource("5_4eo0i")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D/CSGBox3D13"]
+transform = Transform3D(1.09, 0, 0, 0, 0.21, 0, 0, 0, 1.105, 0, 0.4, 0)
+size = Vector3(1.0004883, 1, 1)
+material = ExtResource("6_86ljf")
 
 [node name="CSGBox3D12" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D"]
 transform = Transform3D(28.814316, 0, 0, 0, 4, 0, 0, 0, 2, 0.574481, 1.987, 3.5765038)
 size = Vector3(1.0004883, 1, 1)
-material = ExtResource("2_m3clv")
+material = ExtResource("5_4eo0i")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D/CSGBox3D12"]
+transform = Transform3D(1.045, 0, 0, 0, 0.21, 0, 0, 0, 1.105, -0.011143907, 0.39999998, 0)
+size = Vector3(1.0004883, 1, 1)
+material = ExtResource("6_86ljf")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D"]
-transform = Transform3D(-1.6033787e-06, 0, 2, 0, 4, 0, -36.681026, 0, -8.742278e-08, -31.267456, 1.987, 14.204365)
+transform = Transform3D(-1.6033774e-06, 0, 10, 0, 4, 0, -36.681, 0, -4.371139e-07, -35.969887, 1.987, 14.204365)
 size = Vector3(1.0004883, 1, 1)
-material = ExtResource("2_m3clv")
+material = ExtResource("5_4eo0i")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D/CSGBox3D3"]
+transform = Transform3D(1, 0, 0, 0, 0.21, 0, 0, 0, 1.105, 0, 0.40041155, 0)
+size = Vector3(1.0004883, 1, 1)
+material = ExtResource("6_86ljf")
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D"]
-transform = Transform3D(-1.6033787e-06, 0, 2, 0, 4, 0, -36.681026, 0, -8.742278e-08, 168.61133, 1.987, 14.204365)
+transform = Transform3D(-1.6033774e-06, 0, 10, 0, 4, 0, -36.681, 0, -4.371139e-07, 168.61133, 1.987, 14.204365)
 size = Vector3(1.0004883, 1, 1)
-material = ExtResource("2_m3clv")
+material = ExtResource("5_4eo0i")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D/CSGBox3D5"]
+transform = Transform3D(1, 0, 0, 0, 0.21, 0, 0, 0, 1.105, 0, 0.40041155, 0)
+size = Vector3(1.0004883, 1, 1)
+material = ExtResource("6_86ljf")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D"]
 transform = Transform3D(-1.2302141e-06, 0, 2, 0, 4, 0, -28.144018, 0, -8.742278e-08, 50.25435, 1.987, 19.367931)
 size = Vector3(1.0004883, 1, 1)
-material = ExtResource("2_m3clv")
+material = ExtResource("5_4eo0i")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D/CSGBox3D6"]
+transform = Transform3D(1.015, 0, 0, 0, 0.21, 0, 0, 0, 1.105, 0, 0.4, 0)
+size = Vector3(1.0004883, 1, 1)
+material = ExtResource("6_86ljf")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D"]
 transform = Transform3D(-1.2302141e-06, 0, 2, 0, 4, 0, -28.144018, 0, -8.742278e-08, 34.69573, 1.987, 7.7514153)
 size = Vector3(1.0004883, 1, 1)
-material = ExtResource("2_m3clv")
+material = ExtResource("5_4eo0i")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D/CSGBox3D7"]
+transform = Transform3D(1.005, 0, 0, 0, 0.21, 0, 0, 0, 1.105, 0, 0.4, 0)
+size = Vector3(1.0004883, 1, 1)
+material = ExtResource("6_86ljf")
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D"]
 transform = Transform3D(-9.303049e-07, 0, 2, 0, 4, 0, -21.282894, 0, -8.742278e-08, -13.7913475, 1.987, 13.255316)
 size = Vector3(1.0004883, 1, 1)
-material = ExtResource("2_m3clv")
+material = ExtResource("5_4eo0i")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="Environment/PonyWorld/CSGCombiner3D/CSGCombiner3D/CSGBox3D8"]
+transform = Transform3D(1, 0, 0, 0, 0.21, 0, 0, 0, 1.105, 0, 0.4, 0)
+size = Vector3(1.0004883, 1, 1)
+material = ExtResource("6_86ljf")
 
 [node name="Door" type="MeshInstance3D" parent="Environment/PonyWorld"]
 transform = Transform3D(4.609689, 0, 0, 0, 6.679917, 0, 0, 0, 1.2746332, -23.722193, 3.1989145, 29.917473)
@@ -220,22 +295,34 @@ visibility_parent = NodePath("../CSGCombiner3D")
 
 [node name="PaperNote2" parent="Environment/PonyWorld" instance=ExtResource("2_wkftn")]
 transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, -23.35412, 0.005344391, 2.237463)
+visible = false
 visibility_parent = NodePath("../CSGCombiner3D/CSGCombiner3D")
 
 [node name="PaperNote3" parent="Environment/PonyWorld" instance=ExtResource("2_wkftn")]
 transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, 42.64795, 0.005344391, 2.237463)
+visible = false
 visibility_parent = NodePath("../CSGCombiner3D/CSGCombiner3D")
 
 [node name="PaperNote4" parent="Environment/PonyWorld" instance=ExtResource("2_wkftn")]
 transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, 59.724842, 0.005344391, 26.319422)
+visible = false
 visibility_parent = NodePath("../CSGCombiner3D/CSGCombiner3D")
 
 [node name="PaperNote5" parent="Environment/PonyWorld" instance=ExtResource("2_wkftn")]
 transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, 162.27692, 0.005344391, 4.393509)
+visible = false
 visibility_parent = NodePath("../CSGCombiner3D/CSGCombiner3D")
 
 [node name="Player" parent="." instance=ExtResource("3_q4iis")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.736038, 0.15728295, 27.69996)
 
-[node name="Enemy" parent="." instance=ExtResource("6_m3clv")]
+[node name="EnemieGroup" type="Node" parent="."]
+
+[node name="Enemy" parent="EnemieGroup" instance=ExtResource("6_m3clv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2958336, 0)
+
+[node name="Enemy2" parent="EnemieGroup" instance=ExtResource("6_m3clv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2958336, 25.234707)
+
+[node name="Enemy3" parent="EnemieGroup" instance=ExtResource("6_m3clv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2958336, 9.97422)

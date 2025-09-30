@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://difbls1p6tm1"]
+[gd_scene load_steps=6 format=3 uid="uid://difbls1p6tm1"]
 
 [ext_resource type="Script" uid="uid://bbvagcwoc1jna" path="res://enemy.gd" id="1_7k104"]
 
@@ -10,6 +10,9 @@ material = SubResource("StandardMaterial3D_4gyqm")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7k104"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_7k104"]
+radius = 0.8
+
 [node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
 script = ExtResource("1_7k104")
 
@@ -20,3 +23,12 @@ mesh = SubResource("CapsuleMesh_7xaro")
 shape = SubResource("CapsuleShape3D_7k104")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_7k104")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

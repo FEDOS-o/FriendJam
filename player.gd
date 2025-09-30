@@ -25,6 +25,8 @@ var max_ammo = 7
 var reserve_ammo = 35
 var max_reserve_ammo = 35
 
+var health = 3
+
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -33,9 +35,9 @@ func _ready():
 	_update_ammo_display()
 
 func _setup_raycast():
-	ray_cast_3d.debug_shape_thickness = 1
-	ray_cast_3d.debug_shape_custom_color = Color(1, 0, 0, 0.8)
-	ray_cast_3d.enabled = true
+	#ray_cast_3d.debug_shape_thickness = 2
+	#ray_cast_3d.debug_shape_custom_color = Color(1, 0, 0, 0.8)
+	#ray_cast_3d.enabled = true
 	
 	# Устанавливаем начальную позицию RayCast (например, на оружии или камере)
 	ray_cast_3d.global_position = fp_camera.global_position
@@ -132,19 +134,9 @@ func _shoot() -> void:
 func _handle_hit():
 	if ray_cast_3d.is_colliding():
 		var collider = ray_cast_3d.get_collider()
-		var collision_point = ray_cast_3d.get_collision_point()
-		var collision_normal = ray_cast_3d.get_collision_normal()
 		
-		print("Попадание в: ", collider.name)
-		print("Точка попадания: ", collision_point)
-		print("Нормаль: ", collision_normal)
-		
-		# Проверяем, является ли цель врагом (пример)
 		if collider.has_method("die"):
 			collider.die()
-		
-	else:
-		print("Промах!")
 	
 	
 func _reload() -> void:
@@ -211,3 +203,9 @@ func calculate_ray_direction(normalized_pos: Vector2) -> Vector3:
 	).normalized()
 	
 	return camera_basis * ray_dir_camera
+
+
+func get_damage() -> void:
+	health -= 1
+	if health <= 0:
+		print("Ты проиграл")
