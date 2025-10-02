@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cfa3i6n40bfaa" path="res://control.gd" id="1_kpqkn"]
 [ext_resource type="FontFile" uid="uid://bd8d3ddc2lc5f" path="res://assets/ofont.ru_Grunge.ttf" id="2_nwbow"]
-[ext_resource type="Texture2D" uid="uid://cifpdkfmqo636" path="res://assets/png-klev-club-gnco-p-knopka-restart-png-21.png" id="3_0frb1"]
+[ext_resource type="Texture2D" uid="uid://nlnb03s0fbaf" path="res://assets/refresh_9356083.png" id="3_kpqkn"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -33,15 +33,15 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -402.0
-offset_right = 1971.0
-offset_bottom = 1596.0
+offset_left = -317.0
+offset_top = -615.0
+offset_right = 1754.0
+offset_bottom = 1383.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(0.095, 0.095)
+scale = Vector2(0.305, 0.305)
 text = "Заново
 "
-icon = ExtResource("3_0frb1")
+icon = ExtResource("3_kpqkn")
 flat = true
 icon_alignment = 1

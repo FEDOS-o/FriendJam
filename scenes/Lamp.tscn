@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcrh7ffcujm4d"]
+
+[ext_resource type="PackedScene" uid="uid://c8dc4ni50wriq" path="res://assets/industrial_lamp_omp-300.glb" id="1_gosxj"]
+
+[node name="Lamp" type="Node3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_gosxj")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0130144, 0)

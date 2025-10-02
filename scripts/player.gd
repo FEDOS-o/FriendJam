@@ -126,6 +126,7 @@ func _shoot() -> void:
 		return
 		
 	if current_ammo <= 0:
+		$ClickSound.play()
 		return	
 		
 	current_ammo -= 1
