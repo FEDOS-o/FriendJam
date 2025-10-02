@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6ai5074kvaet"]
+[gd_scene load_steps=5 format=3 uid="uid://c6ai5074kvaet"]
 
 [ext_resource type="Script" uid="uid://b18oel6hjtee2" path="res://scripts/paper_note.gd" id="1_vm07x"]
+[ext_resource type="Texture2D" uid="uid://c5m6fhwocgbwk" path="res://assets/записка милая.png" id="2_2tsxj"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_shqys"]
 
@@ -12,12 +13,17 @@ height = 2.13
 script = ExtResource("1_vm07x")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1569048, 0)
+transform = Transform3D(0.775, 0, 0, 0, 1, 0, 0, 0, 0.955, 0, 1.1974872, 0)
 layers = 2
 mesh = SubResource("PlaneMesh_shqys")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.1569048, 0)
 shape = SubResource("CapsuleShape3D_shqys")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.14, 0, 0, 0, -6.119594e-09, -0.14, 0, 0.14, -6.119594e-09, 0, 1.2, 0)
+layers = 2
+texture = ExtResource("2_2tsxj")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

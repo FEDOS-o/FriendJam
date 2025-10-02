@@ -6,6 +6,11 @@ class_name PaperNote
 
 static var current_num = 1
 
+@export var rotation_speed: float = 1.0  # Скорость вращения
+@export var rotation_axis: Vector3 = Vector3.UP  # Ось вращения (по умолчанию Y)
+
+func _process(delta):
+	rotate(rotation_axis, rotation_speed * delta)
 
 func _on_body_entered(body: Node3D) -> void:
 	# Проверяем, что вошёл игрок

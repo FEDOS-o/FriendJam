@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://difbls1p6tm1"]
+[gd_scene load_steps=18 format=3 uid="uid://difbls1p6tm1"]
 
 [ext_resource type="Script" uid="uid://bbvagcwoc1jna" path="res://scripts/enemy.gd" id="1_7k104"]
+[ext_resource type="Texture2D" uid="uid://cs7x5osm53c26" path="res://assets/сучий зондбе сдох хелл еее.png" id="2_4ra3w"]
+[ext_resource type="Texture2D" uid="uid://dxmjdf1l8b25y" path="res://assets/зондбе шагает и тд и тп.png" id="5_c4w8v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gyqm"]
 albedo_color = Color(1, 0.06666667, 0.11764706, 1)
@@ -16,10 +18,85 @@ radius = 0.8
 [sub_resource type="SphereShape3D" id="SphereShape3D_4gyqm"]
 radius = 20.0
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uy6h"]
+atlas = ExtResource("2_4ra3w")
+region = Rect2(0, 0, 1360, 1754)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4w8v"]
+atlas = ExtResource("2_4ra3w")
+region = Rect2(1360, 0, 1360, 1754)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md484"]
+atlas = ExtResource("2_4ra3w")
+region = Rect2(2720, 0, 1360, 1754)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipns3"]
+atlas = ExtResource("5_c4w8v")
+region = Rect2(0, 0, 1017, 1536)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwavj"]
+atlas = ExtResource("5_c4w8v")
+region = Rect2(0, 0, 1017, 1536)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nenq2"]
+atlas = ExtResource("5_c4w8v")
+region = Rect2(1017, 0, 1017, 1536)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qclf"]
+atlas = ExtResource("5_c4w8v")
+region = Rect2(2034, 0, 1017, 1536)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8i8w"]
+atlas = ExtResource("5_c4w8v")
+region = Rect2(3051, 0, 1017, 1536)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5uy6h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uy6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4w8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_md484")
+}],
+"loop": false,
+"name": &"Dead",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipns3")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwavj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nenq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qclf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8i8w")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
 [node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
 script = ExtResource("1_7k104")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CapsuleMesh_7xaro")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -38,6 +115,12 @@ shape = SubResource("SphereShape3D_7k104")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ChaseArea"]
 shape = SubResource("SphereShape3D_4gyqm")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.14, 0, 0, 0, 0.14, 0, 0, 0, 0.14, 0, 0, 0)
+sprite_frames = SubResource("SpriteFrames_5uy6h")
+animation = &"Walk"
+autoplay = "Idle"
 
 [connection signal="body_entered" from="HitArea" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="ChaseArea" to="." method="_on_chase_area_body_entered"]

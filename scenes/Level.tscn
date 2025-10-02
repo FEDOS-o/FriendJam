@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://dcfhcadyrng40"]
+[gd_scene load_steps=19 format=3 uid="uid://dcfhcadyrng40"]
 
 [ext_resource type="Script" uid="uid://c7fetub7buikx" path="res://scripts/navigation_region_3d.gd" id="1_m3clv"]
 [ext_resource type="Material" uid="uid://bwrxprr56ucyw" path="res://assets/rusty_metal_05_4k.blend/rusty_metal_05_4k.tres" id="1_q4iis"]
 [ext_resource type="Material" uid="uid://bt3sjjgr7f7rp" path="res://assets/rusty_metal_grid_4k.blend/rusty_metal_grid_4k.tres" id="2_m3clv"]
 [ext_resource type="PackedScene" uid="uid://c6ai5074kvaet" path="res://scenes/paper_note.tscn" id="2_wkftn"]
 [ext_resource type="PackedScene" uid="uid://djy2016ltpax8" path="res://scenes/player.tscn" id="3_q4iis"]
+[ext_resource type="Material" uid="uid://dsaiqfbgd8tto" path="res://assets/roof_09_4k.blend/roof_09_4k.tres" id="3_rccsh"]
 [ext_resource type="Texture2D" uid="uid://p54e0s3pmuyw" path="res://assets/розовый фон.png" id="4_mxnmf"]
 [ext_resource type="Material" uid="uid://dm1ksg74mbpna" path="res://assets/pie.tres" id="5_4eo0i"]
 [ext_resource type="Material" uid="uid://beiouajhia5qu" path="res://assets/pie_top.tres" id="6_86ljf"]
@@ -13,8 +14,10 @@
 [sub_resource type="GDScript" id="GDScript_4xowi"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmany"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+sky_top_color = Color(0.101960786, 0.16862746, 0.23529412, 1)
+sky_horizon_color = Color(0.1764706, 0.23137255, 0.2901961, 1)
+ground_bottom_color = Color(0.039215688, 0.039215688, 0.039215688, 1)
+ground_horizon_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
 
 [sub_resource type="Sky" id="Sky_c6gwx"]
 sky_material = SubResource("ProceduralSkyMaterial_cmany")
@@ -43,15 +46,21 @@ uv1_triplanar = true
 script = SubResource("GDScript_4xowi")
 
 [node name="DirectionalLight3DPony" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+transform = Transform3D(-0.8660254, -0.49809742, 0.043577906, 0, 0.087155804, 0.9961947, -0.50000006, 0.8627299, -0.07547914, 0, 0, 0)
 layers = 2
+light_cull_mask = 4294967294
 shadow_enabled = true
 
 [node name="DirectionalLight3DRusty" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-light_color = Color(0.32172796, 0.32172796, 0.32172793, 1)
-light_energy = 0.67
+light_color = Color(0.3529412, 0.48235294, 0.6117647, 1)
+light_energy = 0.8
+light_indirect_energy = 0.3
+light_volumetric_fog_energy = 0.1
+light_cull_mask = 4294967293
 shadow_enabled = true
+shadow_bias = 0.05
+shadow_normal_bias = 1.5
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2dftf")
@@ -70,6 +79,10 @@ use_collision = true
 [node name="CSGBox3D" type="CSGBox3D" parent="Environment/RustyWorld/NavigationRegion3D/CSGCombiner3D"]
 transform = Transform3D(757.8049, 0, 0, 0, 1, 0, 0, 0, 172.88408, 57.68778, -0.5033281, 0)
 material = ExtResource("1_q4iis")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Environment/RustyWorld/NavigationRegion3D/CSGCombiner3D"]
+transform = Transform3D(757.8049, 0, 0, 0, 1, 0, 0, 0, 172.88408, 57.68778, 3.88772, 0)
+material = ExtResource("3_rccsh")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Environment/RustyWorld/NavigationRegion3D/CSGCombiner3D"]
 
@@ -142,6 +155,9 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/RustyWorld/Door/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_c6gwx")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Environment/RustyWorld"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.73986, 1.5627027, 5.607415)
 
 [node name="PonyWorld" type="Node3D" parent="Environment"]
 

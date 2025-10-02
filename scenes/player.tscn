@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bxxgttfca1v8j" path="res://scripts/camera_system.gd" id="2_sweqy"]
 [ext_resource type="AudioStream" uid="uid://br7p0j66p3phx" path="res://assets/revolver_shot1.wav" id="3_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://darq3cjam66qr" path="res://assets/шагает сука.png" id="3_tuyoq"]
-[ext_resource type="Texture2D" uid="uid://dq5wq7icnyui2" path="res://assets/спрайт бам2.png" id="4_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://b54mgcg8vceee" path="res://assets/спрайт бам4.png" id="4_fjrip"]
 [ext_resource type="Texture2D" uid="uid://cnxhd1rylf0yo" path="res://assets/перезарядка нахуй.png" id="5_tuyoq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_onrkg"]
@@ -65,7 +65,7 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
-atlas = ExtResource("4_tuyoq")
+atlas = ExtResource("4_fjrip")
 region = Rect2(0, 0, 480, 480)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
@@ -92,20 +92,20 @@ region = Rect2(2032, 0, 508, 508)
 atlas = ExtResource("5_tuyoq")
 region = Rect2(2540, 0, 508, 508)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
-atlas = ExtResource("4_tuyoq")
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("4_fjrip")
 region = Rect2(0, 0, 480, 480)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oprun"]
-atlas = ExtResource("4_tuyoq")
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
+atlas = ExtResource("4_fjrip")
 region = Rect2(480, 0, 480, 480)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a8ls1"]
-atlas = ExtResource("4_tuyoq")
+[sub_resource type="AtlasTexture" id="AtlasTexture_oprun"]
+atlas = ExtResource("4_fjrip")
 region = Rect2(960, 0, 480, 480)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qfm1y"]
-atlas = ExtResource("4_tuyoq")
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8ls1"]
+atlas = ExtResource("4_fjrip")
 region = Rect2(1440, 0, 480, 480)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nvl01"]
@@ -143,6 +143,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_f1ej7")
 }, {
 "duration": 1.0,
@@ -150,9 +153,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a8ls1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qfm1y")
 }],
 "loop": false,
 "name": &"Shoot",
@@ -193,7 +193,7 @@ layers = 2
 sprite_frames = SubResource("SpriteFrames_l71n6")
 animation = &"Walk"
 autoplay = "Idle"
-frame_progress = 0.021430803
+frame_progress = 0.09625713
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
