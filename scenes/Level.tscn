@@ -319,6 +319,11 @@ transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.524
 [node name="PaperNote5" parent="Environment/PonyWorld" instance=ExtResource("2_wkftn")]
 transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, 162.27692, 0.005344391, 4.393509)
 
+[node name="FinalPaperNote6" parent="Environment/PonyWorld" instance=ExtResource("2_wkftn")]
+process_mode = 4
+transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, -27.478811, 0.005344391, 26.608622)
+visible = false
+
 [node name="Player" parent="." instance=ExtResource("3_q4iis")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.736038, 0.15728295, 27.69996)
 

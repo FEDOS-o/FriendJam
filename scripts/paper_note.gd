@@ -19,6 +19,10 @@ func _on_body_entered(body: Node3D) -> void:
 		var new_path = paper_note_ui_path % current_num
 		var ui_scene : PackedScene = load(new_path) as PackedScene
 		current_num += 1
+		if current_num == 6:
+			var final_paper = get_tree().root.find_child("FinalPaperNote6", true, false)
+			final_paper.process_mode = Node.PROCESS_MODE_INHERIT
+			final_paper.visible = true
 		var ui_instance = ui_scene.instantiate()
 		ui_instance.set_player(body)
 		get_tree().root.find_child("CanvasLayer", true, false).add_child(ui_instance)

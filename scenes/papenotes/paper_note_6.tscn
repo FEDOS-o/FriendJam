@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cty3ni4ga2xx0"]
+
+[ext_resource type="PackedScene" uid="uid://cihwxkcyrwre7" path="res://scenes/paper_note_ui.tscn" id="1_7dwmm"]
+[ext_resource type="Script" uid="uid://ctm4m8x4ycn2d" path="res://scripts/paper_note_final.gd" id="2_ume0s"]
+
+[node name="PaperNoteUI" instance=ExtResource("1_7dwmm")]
+script = ExtResource("2_ume0s")
+
+[node name="RichTextLabel" parent="." index="2"]
+text = "На бетонном холодном полу поодаль лежит тело. Подошва оставляет темно-красные следы. Мария? Что произошло? Этого не было когда я уходил, ведь не было, да? "
+
+[node name="RichTextLabel2" parent="." index="3"]
+text = "На бетонном холодном полу поодаль лежит тело. Подошва оставляет темно-красные следы. Мария? Что произошло? Этого не было когда я уходил, ведь не было, да? "
