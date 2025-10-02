@@ -52,7 +52,29 @@ func die() ->void:
 	call_deferred("disable_all_collision_shapes")
 	is_dead = true
 	animated_sprite_3d.play("Dead")
-	#queue_free()
+	try_drop_ammo()
+
+func try_drop_ammo():
+	# Генерируем случайное число от 0.0 до 1.0
+	var random_chance = randf()
+	
+	# Если случайное число меньше или равно шансу выпадения
+	if random_chance <= 0.3:
+		drop_ammo_box()
+
+func drop_ammo_box():
+	# Загружаем сцену патронов
+	var ammo_box_scene = load("res://scenes/ammo_box.tscn") as PackedScene
+	if ammo_box_scene:
+		# Создаем экземпляр
+		var ammo_box = ammo_box_scene.instantiate()
+		
+		# Добавляем в сцену
+		get_tree().current_scene.add_child(ammo_box)
+		
+		# Устанавливаем позицию (текущая позиция врага)
+		ammo_box.global_transform.origin = global_transform.origin
+		
 
 
 func disable_all_collision_shapes():

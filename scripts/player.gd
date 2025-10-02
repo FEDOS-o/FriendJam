@@ -152,6 +152,7 @@ func _reload() -> void:
 	can_shoot = false
 	
 	gun_sprite.play("Reload")
+	$ReloadSound.play()
 	await gun_sprite.animation_finished
 	
 	var ammo_needed = max_ammo - current_ammo
