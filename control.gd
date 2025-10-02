@@ -25,6 +25,8 @@ func restart_game():
 
 func reset_game_state():
 	
+	PaperNote.current_num = 1
+	
 	# Сброс синглтонов
 	reset_singletons()
 	

@@ -7,8 +7,12 @@ extends CharacterBody3D
 var is_chasing = false
 var is_dead = false
 @onready var animated_sprite_3d: AnimatedSprite3D = $AnimatedSprite3D
+@onready var walk_sound: AudioStreamPlayer = $WalkSound
 
 @export var after_paper : PaperNote
+@onready var collision_shape_3d: CollisionShape3D = $CollisionShape3D
+@onready var collision_shape_3d2: CollisionShape3D = $HitArea/CollisionShape3D
+@onready var collision_shape_3d3: CollisionShape3D = $ChaseArea/CollisionShape3D
 
 var player: Player
 
@@ -44,9 +48,18 @@ func update_target_location(target_location) -> void:
 func die() ->void:
 	if is_dead:
 		return
+	walk_sound.stop()
+	call_deferred("disable_all_collision_shapes")
 	is_dead = true
 	animated_sprite_3d.play("Dead")
 	#queue_free()
+
+
+func disable_all_collision_shapes():
+	# Отключаем основные коллайдеры
+	collision_shape_3d.disabled = true
+	collision_shape_3d2.disabled = true
+	collision_shape_3d3.disabled = true
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
@@ -57,5 +70,6 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 
 func _on_chase_area_body_entered(body: Node3D) -> void:
 	if not is_dead and body.has_method("get_damage"):
+		walk_sound.play()
 		is_chasing = true
 		animated_sprite_3d.play("Walk")

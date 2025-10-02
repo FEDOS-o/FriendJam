@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://difbls1p6tm1"]
+[gd_scene load_steps=19 format=3 uid="uid://difbls1p6tm1"]
 
 [ext_resource type="Script" uid="uid://bbvagcwoc1jna" path="res://scripts/enemy.gd" id="1_7k104"]
 [ext_resource type="Texture2D" uid="uid://cs7x5osm53c26" path="res://assets/сучий зондбе сдох хелл еее.png" id="2_4ra3w"]
+[ext_resource type="AudioStream" uid="uid://bexy4nlc6btg7" path="res://assets/ghost.mp3" id="4_5uy6h"]
 [ext_resource type="Texture2D" uid="uid://dxmjdf1l8b25y" path="res://assets/зондбе шагает и тд и тп.png" id="5_c4w8v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gyqm"]
@@ -121,6 +122,12 @@ transform = Transform3D(0.14, 0, 0, 0, 0.14, 0, 0, 0, 0.14, 0, 0, 0)
 sprite_frames = SubResource("SpriteFrames_5uy6h")
 animation = &"Walk"
 autoplay = "Idle"
+
+[node name="WalkSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_5uy6h")
+volume_db = -4.01
+bus = &"Sfx"
+parameters/looping = false
 
 [connection signal="body_entered" from="HitArea" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="ChaseArea" to="." method="_on_chase_area_body_entered"]

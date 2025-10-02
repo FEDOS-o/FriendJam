@@ -8,8 +8,9 @@ class_name Player
 @onready var fp_viewport_container: SubViewportContainer = $CanvasLayer/FPViewportContainer
 @onready var fp_camera: Camera3D = $FPCamera
 @onready var ray_cast_3d: RayCast3D = $FPCamera/RayCast3D
-@onready var ammo: Label = $CanvasLayer/VSplitContainer/FP/Ammo
 @onready var animated_sprite_3d: AnimatedSprite3D = $AnimatedSprite3D
+@onready var damage_sound: AudioStreamPlayer = $DamageSound
+@onready var ammo: Label = $CanvasLayer/VSplitContainer/Ammo
 
 
 const MOUSE_SENS = 1
@@ -21,10 +22,10 @@ var rotate_right = false
 var can_move = true 
 var can_shoot = true
 
-var current_ammo = 7
-var max_ammo = 7
-var reserve_ammo = 35
-var max_reserve_ammo = 35
+var current_ammo = 6
+var max_ammo = 6
+var reserve_ammo = 12
+var max_reserve_ammo = 24
 
 var health = 3
 @onready var hp_hud: Sprite2D = $CanvasLayer/VSplitContainer/HpHud
@@ -211,6 +212,7 @@ func calculate_ray_direction(normalized_pos: Vector2) -> Vector3:
 
 
 func get_damage() -> void:
+	damage_sound.play(0.2)
 	health -= 1
 	change_sprite_texture("res://assets/виньетка йоу %d хп.png" % health)
 	if health <= 0:
