@@ -27,6 +27,7 @@ var reserve_ammo = 35
 var max_reserve_ammo = 35
 
 var health = 3
+@onready var hp_hud: Sprite2D = $CanvasLayer/VSplitContainer/HpHud
 
 
 func _ready():
@@ -211,5 +212,16 @@ func calculate_ray_direction(normalized_pos: Vector2) -> Vector3:
 
 func get_damage() -> void:
 	health -= 1
+	change_sprite_texture("res://assets/виньетка йоу %d хп.png" % health)
 	if health <= 0:
-		print("Ты проиграл")
+		var new_path = "res://scenes/gamover.tscn"
+		var ui_scene : PackedScene = load(new_path) as PackedScene
+		var ui_instance = ui_scene.instantiate()
+		get_tree().root.find_child("CanvasLayer", true, false).add_child(ui_instance)
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		freeze()
+		
+func change_sprite_texture(new_texture_path: String) -> void:
+	var new_texture = load(new_texture_path) as Texture2D
+	hp_hud.texture = new_texture
+	

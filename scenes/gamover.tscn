@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://5ul37yry80cw"]
+
+[ext_resource type="Script" uid="uid://cfa3i6n40bfaa" path="res://control.gd" id="1_kpqkn"]
+[ext_resource type="FontFile" uid="uid://bd8d3ddc2lc5f" path="res://assets/ofont.ru_Grunge.ttf" id="2_nwbow"]
+[ext_resource type="Texture2D" uid="uid://cifpdkfmqo636" path="res://assets/png-klev-club-gnco-p-knopka-restart-png-21.png" id="3_0frb1"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kpqkn")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 510.0
+offset_top = 89.0
+offset_right = 1382.0
+offset_bottom = 449.0
+theme_override_colors/font_color = Color(1, 0.14117648, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("2_nwbow")
+theme_override_font_sizes/font_size = 95
+text = "Вы проиграли"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -402.0
+offset_right = 1971.0
+offset_bottom = 1596.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.095, 0.095)
+text = "Заново
+"
+icon = ExtResource("3_0frb1")
+flat = true
+icon_alignment = 1
