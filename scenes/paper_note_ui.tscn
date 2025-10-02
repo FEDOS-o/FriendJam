@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://cihwxkcyrwre7"]
+
+[ext_resource type="Script" uid="uid://ms32qubmb5d0" path="res://scripts/paper_note_ui.gd" id="1_q2hy8"]
+[ext_resource type="Texture2D" uid="uid://be0o67p4bskld" path="res://assets/записка бг фулл.png" id="2_4vexj"]
+[ext_resource type="FontFile" uid="uid://cc8e4eviabao6" path="res://assets/ofont.ru_beer money.ttf" id="3_dosl0"]
+[ext_resource type="FontFile" uid="uid://bkomryx3beib" path="res://assets/ofont.ru_Bryndan Write.ttf" id="4_rsbdq"]
+
+[node name="PaperNoteUI" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q2hy8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.74, 0.74)
+texture = ExtResource("2_4vexj")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = -36.0
+offset_top = 355.0
+offset_right = 136.0
+offset_bottom = 440.0
+theme_override_font_sizes/font_size = 38
+text = "Закрыть"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -365.0
+offset_top = -301.0
+offset_right = 361.0
+offset_bottom = -15.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_dosl0")
+theme_override_font_sizes/normal_font_size = 35
+text = "На передатчик пришло новое сообщение. Встреча с Агентом Шмидтом. Передал противорадиационные препараты. Принимать ежедневно. Потерян контакт с лояльным шпионом в стане противника."
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -359.0
+offset_top = 29.0
+offset_right = 382.0
+offset_bottom = 268.0
+theme_override_colors/default_color = Color(0.5176471, 0.5254902, 0.9019608, 1)
+theme_override_colors/font_outline_color = Color(0.29411766, 0.3372549, 0.54901963, 1)
+theme_override_constants/line_separation = 5
+theme_override_constants/outline_size = 17
+theme_override_fonts/normal_font = ExtResource("4_rsbdq")
+theme_override_font_sizes/normal_font_size = 55
+text = "Наконец-то вымыл гараж! Выбросил все эти старые банки с краской и химикаты, которые папа годами копил. Несколько штук протекли, пришлось долго оттирать пол. Шума было много, когда одна упала, но теперь там идеально чисто и пахнет хлоркой. Мама будет в восторге, когда вернётся."
+autowrap_trim_flags = 0
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

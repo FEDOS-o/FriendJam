@@ -9,6 +9,7 @@ class_name Player
 @onready var fp_camera: Camera3D = $FPCamera
 @onready var ray_cast_3d: RayCast3D = $FPCamera/RayCast3D
 @onready var ammo: Label = $CanvasLayer/VSplitContainer/FP/Ammo
+@onready var animated_sprite_3d: AnimatedSprite3D = $AnimatedSprite3D
 
 
 const MOUSE_SENS = 1
@@ -94,9 +95,11 @@ func _physics_process(delta: float) -> void:
 	direction = direction.normalized()
 	
 	if direction:
+		animated_sprite_3d.play("Walk")
 		velocity.x = direction.x * SPEED * delta
 		velocity.z = direction.z * SPEED * delta
 	else:
+		animated_sprite_3d.play("Idle")
 		velocity.x = move_toward(velocity.x, 0, SPEED * delta)
 		velocity.z = move_toward(velocity.z, 0, SPEED * delta)
 	
@@ -146,7 +149,8 @@ func _reload() -> void:
 	can_move = false
 	can_shoot = false
 	
-	await get_tree().create_timer(2.0).timeout
+	gun_sprite.play("Reload")
+	await gun_sprite.animation_finished
 	
 	var ammo_needed = max_ammo - current_ammo
 	var ammo_to_reload = min(ammo_needed, reserve_ammo)

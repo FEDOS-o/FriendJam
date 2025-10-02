@@ -1,14 +1,14 @@
 [gd_scene load_steps=18 format=3 uid="uid://dcfhcadyrng40"]
 
-[ext_resource type="Script" uid="uid://c7fetub7buikx" path="res://navigation_region_3d.gd" id="1_m3clv"]
+[ext_resource type="Script" uid="uid://c7fetub7buikx" path="res://scripts/navigation_region_3d.gd" id="1_m3clv"]
 [ext_resource type="Material" uid="uid://bwrxprr56ucyw" path="res://assets/rusty_metal_05_4k.blend/rusty_metal_05_4k.tres" id="1_q4iis"]
 [ext_resource type="Material" uid="uid://bt3sjjgr7f7rp" path="res://assets/rusty_metal_grid_4k.blend/rusty_metal_grid_4k.tres" id="2_m3clv"]
-[ext_resource type="PackedScene" uid="uid://c6ai5074kvaet" path="res://paper_note.tscn" id="2_wkftn"]
-[ext_resource type="PackedScene" uid="uid://djy2016ltpax8" path="res://player.tscn" id="3_q4iis"]
+[ext_resource type="PackedScene" uid="uid://c6ai5074kvaet" path="res://scenes/paper_note.tscn" id="2_wkftn"]
+[ext_resource type="PackedScene" uid="uid://djy2016ltpax8" path="res://scenes/player.tscn" id="3_q4iis"]
 [ext_resource type="Texture2D" uid="uid://p54e0s3pmuyw" path="res://assets/розовый фон.png" id="4_mxnmf"]
 [ext_resource type="Material" uid="uid://dm1ksg74mbpna" path="res://assets/pie.tres" id="5_4eo0i"]
 [ext_resource type="Material" uid="uid://beiouajhia5qu" path="res://assets/pie_top.tres" id="6_86ljf"]
-[ext_resource type="PackedScene" uid="uid://difbls1p6tm1" path="res://enemy.tscn" id="6_m3clv"]
+[ext_resource type="PackedScene" uid="uid://difbls1p6tm1" path="res://scenes/enemy.tscn" id="6_m3clv"]
 
 [sub_resource type="GDScript" id="GDScript_4xowi"]
 
@@ -290,28 +290,18 @@ shape = SubResource("ConcavePolygonShape3D_c6gwx")
 
 [node name="PaperNote" parent="Environment/PonyWorld" instance=ExtResource("2_wkftn")]
 transform = Transform3D(0.58257705, 0, -0.8127755, 0, 1, 0, 0.8127755, 0, 0.58257705, -10.306638, 0, 11.340731)
-visible = false
-visibility_parent = NodePath("../CSGCombiner3D")
 
 [node name="PaperNote2" parent="Environment/PonyWorld" instance=ExtResource("2_wkftn")]
 transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, -23.35412, 0.005344391, 2.237463)
-visible = false
-visibility_parent = NodePath("../CSGCombiner3D/CSGCombiner3D")
 
 [node name="PaperNote3" parent="Environment/PonyWorld" instance=ExtResource("2_wkftn")]
 transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, 42.64795, 0.005344391, 2.237463)
-visible = false
-visibility_parent = NodePath("../CSGCombiner3D/CSGCombiner3D")
 
 [node name="PaperNote4" parent="Environment/PonyWorld" instance=ExtResource("2_wkftn")]
 transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, 59.724842, 0.005344391, 26.319422)
-visible = false
-visibility_parent = NodePath("../CSGCombiner3D/CSGCombiner3D")
 
 [node name="PaperNote5" parent="Environment/PonyWorld" instance=ExtResource("2_wkftn")]
 transform = Transform3D(-0.5245061, 0, -0.8514067, 0, 1, 0, 0.8514067, 0, -0.5245061, 162.27692, 0.005344391, 4.393509)
-visible = false
-visibility_parent = NodePath("../CSGCombiner3D/CSGCombiner3D")
 
 [node name="Player" parent="." instance=ExtResource("3_q4iis")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.736038, 0.15728295, 27.69996)

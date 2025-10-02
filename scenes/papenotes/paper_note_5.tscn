@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://ee0ruqhgguuh"]
+
+[ext_resource type="PackedScene" uid="uid://cihwxkcyrwre7" path="res://scenes/paper_note_ui.tscn" id="1_p3o8s"]
+
+[node name="PaperNoteUI" instance=ExtResource("1_p3o8s")]
+
+[node name="RichTextLabel" parent="." index="2"]
+text = "Я сбежал. 
+Сигнал из помещения Х17 подает сигнал. 
+Нужно проверить. "
+
+[node name="RichTextLabel2" parent="." index="3"]
+text = "Я проснулся с утра и звоню маме.
+ Никто не отвечает. 
+Воспользовавшись моментом, когда дядя отвлечется, я выбежал и побежал домой."

@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://difbls1p6tm1"]
+[gd_scene load_steps=7 format=3 uid="uid://difbls1p6tm1"]
 
-[ext_resource type="Script" uid="uid://bbvagcwoc1jna" path="res://enemy.gd" id="1_7k104"]
+[ext_resource type="Script" uid="uid://bbvagcwoc1jna" path="res://scripts/enemy.gd" id="1_7k104"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4gyqm"]
 albedo_color = Color(1, 0.06666667, 0.11764706, 1)
@@ -13,6 +13,9 @@ material = SubResource("StandardMaterial3D_4gyqm")
 [sub_resource type="SphereShape3D" id="SphereShape3D_7k104"]
 radius = 0.8
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_4gyqm"]
+radius = 20.0
+
 [node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
 script = ExtResource("1_7k104")
 
@@ -24,11 +27,17 @@ shape = SubResource("CapsuleShape3D_7k104")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="HitArea" type="Area3D" parent="."]
 collision_layer = 3
 collision_mask = 3
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
 shape = SubResource("SphereShape3D_7k104")
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[node name="ChaseArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChaseArea"]
+shape = SubResource("SphereShape3D_4gyqm")
+
+[connection signal="body_entered" from="HitArea" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="ChaseArea" to="." method="_on_chase_area_body_entered"]

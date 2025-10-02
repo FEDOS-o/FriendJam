@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh4p6dekr3wlb"]
+
+[ext_resource type="PackedScene" uid="uid://cihwxkcyrwre7" path="res://scenes/paper_note_ui.tscn" id="1_cgr7j"]
+
+[node name="PaperNoteUI" instance=ExtResource("1_cgr7j")]
+
+[node name="RichTextLabel" parent="." index="2"]
+text = "Окружен противником, превосходящим численно. 
+Патроны заканчиваются. 
+Шансы на побег оцениваю в 35%."
+
+[node name="RichTextLabel2" parent="." index="3"]
+text = "Дядя Вернер мне надоел.
+ Уже битый час разговариваем, я хочу играть в стрелялки, а он ни в какую. 
+И уйти гулять не разрешает."

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqqg2tfd5tiqw"]
+
+[ext_resource type="PackedScene" uid="uid://cihwxkcyrwre7" path="res://scenes/paper_note_ui.tscn" id="1_4dafg"]
+
+[node name="PaperNoteUI" instance=ExtResource("1_4dafg")]
+
+[node name="RichTextLabel" parent="." index="2"]
+text = "После нескольких часов ожесточенного боя я попал в плен.
+ Нужно что-то предпринять."
+
+[node name="RichTextLabel2" parent="." index="3"]
+text = "Дядя забрал меня к себе домой на ночевку. 
+Мне не нравится. 
+Опять дал конфет, но я уже не хочу их есть, он настаивает. 
+Я хочу позвонить маме и папе."

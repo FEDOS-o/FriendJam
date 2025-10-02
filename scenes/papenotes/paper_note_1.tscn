@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4mebfelniavb"]
+
+[ext_resource type="PackedScene" uid="uid://cihwxkcyrwre7" path="res://scenes/paper_note_ui.tscn" id="1_a1oop"]
+
+[node name="PaperNoteUI" instance=ExtResource("1_a1oop")]
+
+[node name="RichTextLabel" parent="." index="2"]
+text = "Отчет 17. 
+Помещение Х17 стерилизовано. 
+Контейнеры нейтрализованы. 
+Шум подавлен. 
+Сигнализация восстановлена."
+
+[node name="RichTextLabel2" parent="." index="3"]
+text = "Наконец-то вымыл гараж! 
+Выбросил все эти старые банки с краской и химикаты, которые папа годами копил. 
+Несколько штук протекли, пришлось долго оттирать пол. 
+Шума было много, когда одна упала, но теперь там идеально чисто и пахнет хлоркой. 
+Мама будет в восторге, когда вернётся."

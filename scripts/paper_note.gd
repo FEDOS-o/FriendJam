@@ -2,16 +2,17 @@ extends Area3D
 
 class_name PaperNote
 
-@export var paper_note_ui_path : String = "res://paper_note_ui.tscn"
-var ui_scene : PackedScene
+@export var paper_note_ui_path : String = "res://scenes/papenotes/paper_note_%d.tscn"
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	ui_scene = load(paper_note_ui_path) as PackedScene
+static var current_num = 1
+
 
 func _on_body_entered(body: Node3D) -> void:
 	# Проверяем, что вошёл игрок
 	if body.has_method("add_ammo"):
+		var new_path = paper_note_ui_path % current_num
+		var ui_scene : PackedScene = load(new_path) as PackedScene
+		current_num += 1
 		var ui_instance = ui_scene.instantiate()
 		ui_instance.set_player(body)
 		get_tree().root.find_child("CanvasLayer", true, false).add_child(ui_instance)

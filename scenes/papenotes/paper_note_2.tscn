@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://tmkyx2vi50fq"]
+
+[ext_resource type="PackedScene" uid="uid://cihwxkcyrwre7" path="res://scenes/paper_note_ui.tscn" id="1_2tsew"]
+
+[node name="PaperNoteUI" instance=ExtResource("1_2tsew")]
+
+[node name="RichTextLabel" parent="." index="2"]
+text = "На передатчик пришло новое сообщение. 
+Встреча с Агентом Шмидтом. 
+Передал противорадиационные препараты. 
+Принимать ежедневно. 
+Потерян контакт с лояльным шпионом в стане противника."
+
+[node name="RichTextLabel2" parent="." index="3"]
+text = "Сегодня все странные, даже никто не похвалил, что я убрался в гараже. 
+Пришел Дядя Вернер, поделился конфетами. 
+Вкусные. 
+Сестра со мной не разговаривает."
